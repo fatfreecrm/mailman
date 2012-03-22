@@ -20,9 +20,11 @@ module Mailman
         @username  = options[:username]
         @password  = options[:password]
         @filter    = options[:filter] || ['NEW']
+        @server    = options[:server]
         @port      = options[:port] || 143
+        @ssl       = !!options[:ssl]
 
-        @connection = Net::IMAP.new(options[:server], @port)
+        @connection = Net::IMAP.new(@server, @port, @ssl)
       end
 
       # Connects to the IMAP server.
